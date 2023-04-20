@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < 16; i++)
         {
+            int[] rtans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
             GameObject newCard = Instantiate(card);
             // newCard를 cards 안으로 옮겨줘
             newCard.transform.parent = GameObject.Find("cards").transform;
