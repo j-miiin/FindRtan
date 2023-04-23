@@ -45,9 +45,16 @@ public class GameManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        time += Time.deltaTime;
-        timeText.text = time.ToString("N2");
+    {     
+        if (time > 30f)
+        {
+            Time.timeScale = 0f;
+            endText.SetActive(true);
+        } else
+        {
+            time += Time.deltaTime;
+            timeText.text = time.ToString("N2");
+        }
     }
 
     public void isMatched()
