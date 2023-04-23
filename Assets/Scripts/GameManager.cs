@@ -8,11 +8,24 @@ public class GameManager : MonoBehaviour
 {
     public Text timeText;
     public GameObject card;
+    public GameObject endText;
     float time;
+
+    public static GameManager I;
+
+    public GameObject firstCard;
+    public GameObject secondCard;
+
+    private void Awake()
+    {
+        I = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
+
         int[] rtans = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
         rtans = rtans.OrderBy(item => Random.Range(-1.0f, 1.0f)).ToArray();
 
@@ -35,5 +48,36 @@ public class GameManager : MonoBehaviour
     {
         time += Time.deltaTime;
         timeText.text = time.ToString("N2");
+    }
+
+    public void isMatched()
+    {
+        string firstCardImage = firstCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
+        string secondCardImage = secondCard.transform.Find("front").GetComponent<SpriteRenderer>().sprite.name;
+
+        if (firstCardImage == secondCardImage)
+        {
+            firstCard.GetComponent<card>().destroyCard();
+            secondCard.GetComponent<card>().destroyCard();
+
+            int cardsLeft = GameObject.Find("cards").transform.childCount;
+            if (cardsLeft == 2)
+            {
+                Invoke("GameEnd", 1f);
+            }
+        } else
+        {
+            firstCard.GetComponent<card>().closeCard();
+            secondCard.GetComponent<card>().closeCard();
+        }
+
+        firstCard = null;
+        secondCard = null;
+    }
+
+    void GameEnd()
+    {
+        Time.timeScale = 0f;
+        endText.SetActive(true);
     }
 }
