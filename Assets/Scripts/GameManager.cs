@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -49,7 +50,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {     
-        if (time > 30f)
+        if (time > 3f)
         {
             Time.timeScale = 0f;
             endText.SetActive(true);
@@ -91,5 +92,10 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         endText.SetActive(true);
+    }
+
+    public void retryGame()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }
