@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {     
-        if (time > 3f)
+        if (time > 30f)
         {
             Time.timeScale = 0f;
             endText.SetActive(true);
